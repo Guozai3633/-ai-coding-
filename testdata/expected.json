@@ -1,0 +1,22 @@
+[
+  {"ip": "1.2.3.4", "port": 22, "protocol": "SSH", "product": "OpenSSH", "version": "8.9p1", "os_hint": "Ubuntu", "confidence": 0.95},
+  {"ip": "1.2.3.5", "port": 80, "protocol": "HTTP", "product": "nginx", "version": "1.24.0", "os_hint": "", "confidence": 0.9},
+  {"ip": "1.2.3.6", "port": 443, "protocol": "HTTP", "product": "Apache", "version": "2.4.57", "os_hint": "", "confidence": 0.9},
+  {"ip": "1.2.3.7", "port": 3306, "protocol": "MySQL", "product": "MySQL", "version": "8.0.32", "os_hint": "", "confidence": 0.9},
+  {"ip": "1.2.3.8", "port": 6379, "protocol": "Redis", "product": "Redis", "version": "", "os_hint": "", "confidence": 0.7},
+  {"ip": "1.2.3.9", "port": 21, "protocol": "FTP", "product": "ProFTPD", "version": "1.3.7", "os_hint": "", "confidence": 0.9},
+  {"ip": "1.2.3.10", "port": 8080, "protocol": "HTTP", "product": "Jetty", "version": "9.4.51", "os_hint": "", "confidence": 0.85},
+  {"ip": "1.2.3.11", "port": 22, "protocol": "SSH", "product": "OpenSSH", "version": "9.3", "os_hint": "Debian", "confidence": 0.95},
+  {"ip": "1.2.3.12", "port": 80, "protocol": "HTTP", "product": "nginx", "version": "1.18.0", "os_hint": "Ubuntu", "confidence": 0.9},
+  {"ip": "1.2.3.13", "port": 443, "protocol": "HTTP", "product": "Apache", "version": "2.4.41", "os_hint": "Ubuntu", "confidence": 0.9},
+  {"ip": "1.2.3.14", "port": 3306, "protocol": "MySQL", "product": "MySQL", "version": "5.7.42", "os_hint": "", "confidence": 0.9},
+  {"ip": "1.2.3.15", "port": 6379, "protocol": "Redis", "product": "Redis", "version": "", "os_hint": "", "confidence": 0.7},
+  {"ip": "1.2.3.16", "port": 21, "protocol": "FTP", "product": "vsFTPd", "version": "3.0.5", "os_hint": "", "confidence": 0.9},
+  {"ip": "1.2.3.17", "port": 8443, "protocol": "HTTP", "product": "nginx", "version": "1.25.3", "os_hint": "", "confidence": 0.9},
+  {"ip": "1.2.3.18", "port": 22, "protocol": "SSH", "product": "OpenSSH", "version": "4.3", "os_hint": "", "confidence": 0.95},
+  {"ip": "1.2.3.19", "port": 9999, "protocol": "unknown", "product": "", "version": "", "os_hint": "", "confidence": 0},
+  {"ip": "1.2.3.20", "port": 8888, "protocol": "HTTP", "product": "IIS", "version": "10.0", "os_hint": "", "confidence": 0.9},
+  {"ip": "1.2.3.21", "port": 6379, "protocol": "Redis", "product": "Redis", "version": "", "os_hint": "", "confidence": 0.7},
+  {"ip": "1.2.3.22", "port": 21, "protocol": "FTP", "product": "Pure-FTPd", "version": "", "os_hint": "", "confidence": 0.9},
+  {"ip": "1.2.3.23", "port": 12345, "protocol": "unknown", "product": "", "version": "", "os_hint": "", "confidence": 0}
+]

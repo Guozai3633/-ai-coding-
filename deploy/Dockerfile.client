@@ -1,0 +1,36 @@
+# syntax=docker/dockerfile:1
+#
+# 指纹识别客户端镜像（多阶段构建）
+#
+# 客户端是与服务端完全独立的二进制：读取本地 JSON 文件 -> 调用服务端 -> 展示结果。
+# 构建与运行策略同服务端：静态编译 + distroless + nonroot。
+#
+# 输入文件不打包进镜像，而是由 compose 以只读卷挂载（见 docker-compose.yml），
+# 使镜像保持通用：换一份数据无需重新构建。
+
+# ---------------- 构建阶段 ----------------
+FROM golang:1.24-alpine AS builder
+
+WORKDIR /src
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+
+RUN CGO_ENABLED=0 GOOS=linux go build \
+        -trimpath \
+        -ldflags="-s -w" \
+        -o /out/client \
+        ./cmd/client
+
+# ---------------- 运行阶段 ----------------
+FROM gcr.io/distroless/static:nonroot
+
+COPY --from=builder /out/client /client
+
+USER nonroot:nonroot
+
+# 默认参数可被 compose 的 command 覆盖。
+ENTRYPOINT ["/client"]
+CMD ["-file", "/data/input.json"]

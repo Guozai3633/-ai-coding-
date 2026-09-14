@@ -1,0 +1,19 @@
+# 版本控制与文档
+.git
+.gitignore
+*.md
+
+# 构建产物
+/bin/
+/dist/
+/server
+/client
+*.exe
+
+# 测试数据（容器内不需要，避免污染构建上下文）
+tests/
+testdata/
+
+# 编辑器
+.idea/
+.vscode/

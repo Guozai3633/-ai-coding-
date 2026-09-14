@@ -1,0 +1,42 @@
+# syntax=docker/dockerfile:1
+#
+# 指纹识别服务端镜像（多阶段构建）
+#
+# 设计要点：
+#   1. 构建阶段与运行阶段分离，运行镜像不含 Go 工具链与源码；
+#   2. CGO_ENABLED=0 静态编译，产物可运行在无 libc 的 distroless/static 上；
+#   3. -trimpath -ldflags="-s -w" 去掉路径信息与调试符号，减小体积；
+#   4. 运行阶段使用 distroless，无 shell、无包管理器，攻击面最小；
+#   5. 以 nonroot 用户运行，不依赖容器外的额外配置。
+#
+# 注意：distroless 镜像内没有 shell，因此健康检查不能写成
+# `wget/curl` 命令，而是调用二进制自带的 healthcheck 子命令（见 docker-compose.yml）。
+
+# ---------------- 构建阶段 ----------------
+FROM golang:1.24-alpine AS builder
+
+WORKDIR /src
+
+# 先只复制依赖清单：只要依赖没变，这一层就能命中缓存，无需重新下载模块。
+COPY go.mod go.sum ./
+RUN go mod download
+
+# 再复制源码（.dockerignore 已排除 testdata/tests/文档等无关内容）。
+COPY . .
+
+RUN CGO_ENABLED=0 GOOS=linux go build \
+        -trimpath \
+        -ldflags="-s -w" \
+        -o /out/server \
+        ./cmd/server
+
+# ---------------- 运行阶段 ----------------
+FROM gcr.io/distroless/static:nonroot
+
+# 规则文件由镜像内置一份（go:embed），同时在 compose 中以只读卷挂载外部规则覆盖。
+COPY --from=builder /out/server /server
+
+USER nonroot:nonroot
+EXPOSE 8080
+
+ENTRYPOINT ["/server"]

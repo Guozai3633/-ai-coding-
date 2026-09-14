@@ -1,0 +1,23 @@
+# 构建产物
+/bin/
+/dist/
+/server
+/client
+*.exe
+
+# 工具产生的临时文件
+tmpclaude-*-cwd
+.claude/
+
+
+# 测试与覆盖率
+*.out
+coverage.html
+
+# 编辑器
+.idea/
+.vscode/
+*.swp
+
+# 本地环境
+.env
